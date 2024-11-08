@@ -4,11 +4,21 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AC2</title>
-
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-
+    <style>
+        footer {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            padding: 10px 0;
+        }
+    </style>
 </head>
-<body class="">
+<body>
+
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark d-flex p-2">
         <a class="navbar-brand">Bootstrap</a>
 
@@ -25,24 +35,72 @@
         </ul>
 
         <form class="form-inline ml-auto p-2">
-          <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+          <input class="form-control mr-sm-2 bg-dark" type="search" placeholder="Search" aria-label="Search">
           <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
         </form>
       </nav>
 
-      <form>
-        <div class="form-group w-25 p-2 align-items-center d-flex justify-content-center align-items-center">
-          <label for="formGroupExampleInput p-2">Título</label>
-          <input type="text" class="form-control p-2" id="formGroupExampleInput" placeholder="Input exemplo">
+<div class="container my-4">
+    <div class="row">
+        <div class="col-md-6 mx-auto">
+            <div class="input-group">
+                <input type="text" id="tituloInput" class="form-control" placeholder="Título">
+                <button onclick="cadastrarCard()" class="btn btn-primary">Cadastrar</button>
+            </div>
         </div>
-        <button type="submit" class="btn btn-primary mb-2 p-2">Enviar</button>
-      </form>
+    </div>
+</div>
 
-      <footer class="footer bg-dark text-light fixed-bottom">
-        <div class="text-center" style="background-color: #131313; padding: 20px;" >
-          Copyright Facens&copy2024 - Webdesign - João Pedro de Almeida Lagemann
-        </div>
-      </footer>
+<div class="container">
+    <div class="row" id="cardContainer">
+        <!-- Cards serão adicionados aqui dinamicamente -->
+    </div>
+    <div class="text-center mt-4">
+        <button onclick="apagarTodos()" class="btn btn-danger">APAGAR TODOS</button>
+    </div>
+</div>
 
+<footer>
+    Copyright Facens©2024 - Webdesign - João Lagemann(248172) Tayran Iwassaki(248117)
+</footer>
+
+<script>
+    function cadastrarCard() {
+        const titulo = document.getElementById("tituloInput").value;
+        if (!titulo) return;
+
+        const cardContainer = document.getElementById("cardContainer");
+
+        const col = document.createElement("div");
+        col.classList.add("col-md-3", "mb-4");
+
+        const card = `
+            <div class="card">
+                <img src="https://picsum.photos/200" class="card-img-top" alt="Imagem do card">
+                <div class="card-body text-center">
+                    <h5 class="card-title">${titulo}</h5>
+                    <button onclick="apagarCard(this)" class="btn btn-danger">Apagar</button>
+                </div>
+            </div>
+        `;
+
+        col.innerHTML = card;
+        cardContainer.appendChild(col);
+
+        document.getElementById("tituloInput").value = '';
+    }
+
+    function apagarCard(button) {
+        const card = button.closest(".col-md-3");
+        card.remove();
+    }
+
+    function apagarTodos() {
+        const cardContainer = document.getElementById("cardContainer");
+        cardContainer.innerHTML = '';
+    }
+</script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
