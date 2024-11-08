@@ -52,9 +52,7 @@
 </div>
 
 <div class="container">
-    <div class="row" id="cardContainer">
-        <!-- Cards serão adicionados aqui dinamicamente -->
-    </div>
+    <div class="row" id="cardContainer"></div>
     <div class="text-center mt-4">
         <button onclick="apagarTodos()" class="btn btn-danger">APAGAR TODOS</button>
     </div>
@@ -65,8 +63,10 @@
 </footer>
 
 <script>
+    let idimg=1;
     function cadastrarCard() {
         const titulo = document.getElementById("tituloInput").value;
+
         if (!titulo) return;
 
         const cardContainer = document.getElementById("cardContainer");
@@ -76,7 +76,7 @@
 
         const card = `
             <div class="card">
-                <img src="https://picsum.photos/200" class="card-img-top" alt="Imagem do card">
+                <img src="https://picsum.photos/id/${idimg}/200/300" class="card-img-top" alt="Imagem">
                 <div class="card-body text-center">
                     <h5 class="card-title">${titulo}</h5>
                     <button onclick="apagarCard(this)" class="btn btn-danger">Apagar</button>
@@ -88,6 +88,7 @@
         cardContainer.appendChild(col);
 
         document.getElementById("tituloInput").value = '';
+        idimg++;
     }
 
     function apagarCard(button) {
